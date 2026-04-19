@@ -662,6 +662,16 @@ a:hover {
   backdrop-filter: blur(20px);
   position: relative;
   overflow: hidden;
+  z-index: 1;
+}
+
+.auth-header,
+.auth-card form,
+.auth-footer,
+.form-divider,
+.google-btn-container {
+  position: relative;
+  z-index: 10;
 }
 
 .auth-card::before {
@@ -674,6 +684,8 @@ a:hover {
   background: conic-gradient(from 0deg, transparent, var(--accent-cyan), transparent, var(--accent-magenta), transparent);
   opacity: 0.05;
   animation: rotate 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes rotate {
