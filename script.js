@@ -679,7 +679,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Logout button
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', Auth.logout);
+    logoutBtn.addEventListener('click', () => {
+      const session = JSON.parse(localStorage.getItem('databreach_session'));
+      if (session?.loginType === 'google') {
+        GoogleAuth.logout();
+      } else {
+        Auth.logout();
+      }
+    });
   }
   
   // Toggle password visibility
