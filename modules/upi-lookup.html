@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPI Lookup - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Data Breach</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../dashboard.html">Dashboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="module-page">
+    <div class="module-header">
+      <div class="container">
+        <h1>💰 UPI Lookup</h1>
+        <p>Unified Payments Interface ID verification</p>
+      </div>
+    </div>
+    <div class="module-content">
+      <div class="container">
+        <form id="upiForm" class="module-form" data-module="upiLookup">
+          <div class="module-input-group">
+            <label for="upiId">UPI ID</label>
+            <input type="text" id="upiId" class="form-input" placeholder="Enter UPI ID (e.g., name@upi)">
+          </div>
+          <button type="submit" class="btn btn-primary">Lookup UPI</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>

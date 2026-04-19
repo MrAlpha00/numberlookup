@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aadhaar Verify - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo"><div class="logo-icon">⚡</div><span>Data Breach</span></a>
+      <ul class="nav-links"><li><a href="../dashboard.html">Dashboard</a></li></ul>
+      <div class="nav-actions"><button id="logoutBtn" class="btn btn-ghost">Logout</button></div>
+    </div>
+  </nav>
+  <section class="module-page">
+    <div class="module-header"><div class="container"><h1>🪪 Aadhaar Verify</h1><p>Aadhaar number verification for India</p></div></div>
+    <div class="module-content">
+      <div class="container">
+        <form id="aadhaarForm" class="module-form" data-module="aadhaarVerify">
+          <div class="module-input-group"><label for="aadhaarNumber">Aadhaar Number</label><input type="text" id="aadhaarNumber" class="form-input" placeholder="Enter 12-digit Aadhaar"></div>
+          <button type="submit" class="btn btn-primary">Verify Aadhaar</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+  <script src="../script.js"></script>
+</body>
+</html>

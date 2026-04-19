@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IFSC Lookup - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Data Breach</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../dashboard.html">Dashboard</a></li>
+        <li><a href="ifsc-lookup.html">IFSC Lookup</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="module-page">
+    <div class="module-header">
+      <div class="container">
+        <h1>🏦 IFSC Lookup</h1>
+        <p>Indian financial system code for bank branch verification</p>
+      </div>
+    </div>
+    <div class="module-content">
+      <div class="container">
+        <form id="ifscForm" class="module-form" data-module="ifscLookup">
+          <div class="module-input-group">
+            <label for="ifscCode">IFSC Code</label>
+            <input type="text" id="ifscCode" class="form-input" placeholder="Enter IFSC code (e.g., SBIN0001234)">
+          </div>
+          <button type="submit" class="btn btn-primary">Lookup IFSC</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>

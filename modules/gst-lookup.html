@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Verification - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Data Breach</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../dashboard.html">Dashboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="module-page">
+    <div class="module-header">
+      <div class="container">
+        <h1>📋 GST Verification</h1>
+        <p>Indian Goods and Services Tax registration verification</p>
+      </div>
+    </div>
+    <div class="module-content">
+      <div class="container">
+        <form id="gstForm" class="module-form" data-module="gstLookup">
+          <div class="module-input-group">
+            <label for="gstNumber">GST Number</label>
+            <input type="text" id="gstNumber" class="form-input" placeholder="Enter GSTIN (e.g., 29AABCD123M1ZR)">
+          </div>
+          <button type="submit" class="btn btn-primary">Verify GST</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>

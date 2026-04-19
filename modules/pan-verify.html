@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAN Verify - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo"><div class="logo-icon">⚡</div><span>Data Breach</span></a>
+      <ul class="nav-links"><li><a href="../dashboard.html">Dashboard</a></li></ul>
+      <div class="nav-actions"><button id="logoutBtn" class="btn btn-ghost">Logout</button></div>
+    </div>
+  </nav>
+  <section class="module-page">
+    <div class="module-header"><div class="container"><h1>📄 PAN Verify</h1><p>Permanent Account Number verification</p></div></div>
+    <div class="module-content">
+      <div class="container">
+        <form id="panForm" class="module-form" data-module="panVerify">
+          <div class="module-input-group"><label for="panNumber">PAN Number</label><input type="text" id="panNumber" class="form-input" placeholder="Enter 10-character PAN"></div>
+          <button type="submit" class="btn btn-primary">Verify PAN</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+  <script src="../script.js"></script>
+</body>
+</html>

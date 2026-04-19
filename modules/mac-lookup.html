@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAC Lookup - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Data Breach</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../dashboard.html">Dashboard</a></li>
+        <li><a href="mac-lookup.html">MAC Lookup</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="module-page">
+    <div class="module-header">
+      <div class="container">
+        <h1>💻 MAC Address Lookup</h1>
+        <p>Find vendor/manufacturer information from MAC address OUI</p>
+      </div>
+    </div>
+    <div class="module-content">
+      <div class="container">
+        <form id="macForm" class="module-form" data-module="macLookup">
+          <div class="module-input-group">
+            <label for="macAddress">MAC Address</label>
+            <input type="text" id="macAddress" class="form-input" placeholder="Enter MAC address (e.g., 00:1A:2B:3C:4D:5E)">
+          </div>
+          <button type="submit" class="btn btn-primary">Lookup MAC</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>

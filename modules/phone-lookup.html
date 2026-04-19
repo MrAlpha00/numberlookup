@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Lookup - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Data Breach</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../dashboard.html">Dashboard</a></li>
+        <li><a href="phone-lookup.html">Phone Lookup</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="module-page">
+    <div class="module-header">
+      <div class="container">
+        <h1>📱 Phone Lookup</h1>
+        <p>Search phone number details including name, address, provider, and more</p>
+      </div>
+    </div>
+    <div class="module-content">
+      <div class="container">
+        <form id="phoneForm" class="module-form">
+          <div class="module-input-group">
+            <label for="apiKey">API Key *</label>
+            <input type="text" id="apiKey" class="form-input" placeholder="Enter your API key" required>
+          </div>
+          <div class="module-input-group">
+            <label for="phoneNumber">Phone Number *</label>
+            <input type="tel" id="phoneNumber" class="form-input" placeholder="Enter phone number (e.g., 9663866778)" required>
+          </div>
+          <button type="submit" id="lookupBtn" class="btn btn-primary">Search Number</button>
+        </form>
+        
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 Data Breach. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

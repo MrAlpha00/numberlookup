@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIN Lookup - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Data Breach</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../dashboard.html">Dashboard</a></li>
+        <li><a href="bin-lookup.html">BIN Lookup</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="module-page">
+    <div class="module-header">
+      <div class="container">
+        <h1>💳 BIN Lookup</h1>
+        <p>Bank Identification Number lookup for card issuer information</p>
+      </div>
+    </div>
+    <div class="module-content">
+      <div class="container">
+        <form id="binForm" class="module-form" data-module="binLookup">
+          <div class="module-input-group">
+            <label for="binNumber">BIN / IIN</label>
+            <input type="text" id="binNumber" class="form-input" placeholder="Enter first 6 digits (e.g., 457661)">
+          </div>
+          <button type="submit" class="btn btn-primary">Lookup BIN</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Data Breach</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Data Breach</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="modules/phone-lookup.html">Phone Lookup</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="dashboard-page">
+    <div class="dashboard-header">
+      <div class="container">
+        <h1>Welcome to Data Breach</h1>
+        <p>Your all-in-one OSINT investigation toolkit</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="dashboard-grid">
+        <a href="modules/phone-lookup.html" class="dashboard-card">
+          <div class="card-icon">📱</div>
+          <h3>Phone Lookup</h3>
+          <p>Search phone number details with name, address, and provider</p>
+        </a>
+        <a href="modules/email-lookup.html" class="dashboard-card">
+          <div class="card-icon">📧</div>
+          <h3>Email Lookup</h3>
+          <p>Find person information from email addresses</p>
+        </a>
+        <a href="modules/ip-lookup.html" class="dashboard-card">
+          <div class="card-icon">🌐</div>
+          <h3>IP Lookup</h3>
+          <p>Get IP address location and ISP information</p>
+        </a>
+        <a href="modules/domain-whois.html" class="dashboard-card">
+          <div class="card-icon">🔎</div>
+          <h3>Domain WHOIS</h3>
+          <p>Domain registration and ownership details</p>
+        </a>
+        <a href="modules/dns-lookup.html" class="dashboard-card">
+          <div class="card-icon">📡</div>
+          <h3>DNS Records</h3>
+          <p>Query DNS records (A, MX, TXT, NS)</p>
+        </a>
+        <a href="modules/port-scanner.html" class="dashboard-card">
+          <div class="card-icon">🚪</div>
+          <h3>Port Scanner</h3>
+          <p>Scan common ports on target hosts</p>
+        </a>
+        <a href="modules/subdomain.html" class="dashboard-card">
+          <div class="card-icon">🌍</div>
+          <h3>Subdomain Enum</h3>
+          <p>Enumerate subdomains for target domains</p>
+        </a>
+        <a href="modules/mac-lookup.html" class="dashboard-card">
+          <div class="card-icon">💻</div>
+          <h3>MAC Lookup</h3>
+          <p>Find vendor from MAC address</p>
+        </a>
+        <a href="modules/ifsc-lookup.html" class="dashboard-card">
+          <div class="card-icon">🏦</div>
+          <h3>IFSC Lookup</h3>
+          <p>Indian bank IFSC code verification</p>
+        </a>
+        <a href="modules/bin-lookup.html" class="dashboard-card">
+          <div class="card-icon">💳</div>
+          <h3>BIN Lookup</h3>
+          <p>Bank Identification Number lookup</p>
+        </a>
+        <a href="modules/gst-lookup.html" class="dashboard-card">
+          <div class="card-icon">📋</div>
+          <h3>GST Verification</h3>
+          <p>Indian GST number verification</p>
+        </a>
+        <a href="modules/upi-lookup.html" class="dashboard-card">
+          <div class="card-icon">💰</div>
+          <h3>UPI Lookup</h3>
+          <p>UPI ID verification for India</p>
+        </a>
+        <a href="modules/pincode-lookup.html" class="dashboard-card">
+          <div class="card-icon">📮</div>
+          <h3>Pincode Lookup</h3>
+          <p>Indian pincode information</p>
+        </a>
+        <a href="modules/vehicle-lookup.html" class="dashboard-card">
+          <div class="card-icon">🚗</div>
+          <h3>Vehicle Info</h3>
+          <p>Indian vehicle registration details</p>
+        </a>
+        <a href="modules/court-records.html" class="dashboard-card">
+          <div class="card-icon">⚖️</div>
+          <h3>Court Records</h3>
+          <p>Search Indian court records</p>
+        </a>
+        <a href="modules/aadhaar-verify.html" class="dashboard-card">
+          <div class="card-icon">🪪</div>
+          <h3>Aadhaar Verify</h3>
+          <p>Aadhaar number verification</p>
+        </a>
+        <a href="modules/pan-verify.html" class="dashboard-card">
+          <div class="card-icon">📄</div>
+          <h3>PAN Verify</h3>
+          <p>PAN card verification</p>
+        </a>
+        <a href="modules/imei-check.html" class="dashboard-card">
+          <div class="card-icon">📱</div>
+          <h3>IMEI Check</h3>
+          <p>IMEI validation and device info</p>
+        </a>
+        <a href="modules/ssl-certificate.html" class="dashboard-card">
+          <div class="card-icon">🔒</div>
+          <h3>SSL Certificate</h3>
+          <p>SSL certificate details</p>
+        </a>
+        <a href="modules/hash-lookup.html" class="dashboard-card">
+          <div class="card-icon">#</div>
+          <h3>Hash Lookup</h3>
+          <p>Identify hash types</p>
+        </a>
+        <a href="modules/url-scanner.html" class="dashboard-card">
+          <div class="card-icon">🔗</div>
+          <h3>URL Scanner</h3>
+          <p>Scan URLs for safety</p>
+        </a>
+        <a href="modules/json-csv.html" class="dashboard-card">
+          <div class="card-icon">📊</div>
+          <h3>JSON to CSV</h3>
+          <p>Convert JSON data to CSV</p>
+        </a>
+        <a href="modules/base64.html" class="dashboard-card">
+          <div class="card-icon">🔤</div>
+          <h3>Base64 Utility</h3>
+          <p>Encode/Decode Base64</p>
+        </a>
+        <a href="modules/shipment-track.html" class="dashboard-card">
+          <div class="card-icon">📦</div>
+          <h3>Shipment Track</h3>
+          <p>Track courier shipments</p>
+        </a>
+        <a href="modules/telegram-lookup.html" class="dashboard-card">
+          <div class="card-icon">✈️</div>
+          <h3>Telegram Lookup</h3>
+          <p>Telegram user information</p>
+        </a>
+        <a href="modules/username-search.html" class="dashboard-card">
+          <div class="card-icon">👤</div>
+          <h3>Username Search</h3>
+          <p>Search username across platforms</p>
+        </a>
+        <a href="modules/social-scan.html" class="dashboard-card">
+          <div class="card-icon">🔍</div>
+          <h3>Social Scan</h3>
+          <p>Social media profile scan</p>
+        </a>
+        <a href="modules/instagram-osint.html" class="dashboard-card">
+          <div class="card-icon">📷</div>
+          <h3>Instagram OSINT</h3>
+          <p>Instagram information gatherer</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
