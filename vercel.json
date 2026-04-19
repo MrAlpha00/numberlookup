@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.dev/schema.json",
+  "buildCommand": "echo 'No build required for static HTML'",
+  "outputDirectory": ".",
+  "framework": null,
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "handle": "filesystem"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
