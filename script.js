@@ -92,6 +92,8 @@ const APIConfig = {
 // API CONFIGURATION
 // Phone Lookup API URL
 const API_URL = 'https://nv6.ek4nsh.in/api/proxy';
+// CORS proxy (use if API blocks browser requests)
+const CORS_PROXY = 'https://corsproxy.io/?';
 
 // ============================================
 // MODULE HANDLERS
@@ -104,7 +106,7 @@ const Modules = {
     }
 
     try {
-      // Call your real API
+      // Direct API call (works locally, might need CORS proxy on production)
       const response = await fetch(`${API_URL}?num=${encodeURIComponent(number)}`);
       
       if (!response.ok) {
@@ -116,11 +118,19 @@ const Modules = {
       // Return the data as-is from your API
       return data;
     } catch (error) {
-      // If API fails, try to get any partial data or show error
-      if (error.message.includes('Failed to fetch')) {
-        throw new Error('Unable to connect to API. Please check your internet connection.');
+      // If direct fails, try with CORS proxy
+      try {
+        const proxyResponse = await fetch(`${CORS_PROXY}${encodeURIComponent(API_URL)}?num=${encodeURIComponent(number)}`);
+        if (!proxyResponse.ok) {
+          throw new Error(`API error: ${proxyResponse.status}`);
+        }
+        return await proxyResponse.json();
+      } catch (proxyError) {
+        if (error.message.includes('Failed to fetch') || proxyError.message.includes('Failed to fetch')) {
+          throw new Error('Unable to connect to API. Please check your internet connection.');
+        }
+        throw error;
       }
-      throw error;
     }
   },
   
