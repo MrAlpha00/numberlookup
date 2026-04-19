@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Scanner - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo"><div class="logo-icon">⚡</div><span>Data Breach</span></a>
+      <ul class="nav-links"><li><a href="../dashboard.html">Dashboard</a></li></ul>
+      <div class="nav-actions"><button id="logoutBtn" class="btn btn-ghost">Logout</button></div>
+    </div>
+  </nav>
+  <section class="module-page">
+    <div class="module-header"><div class="container"><h1>🔗 URL Scanner</h1><p>Scan URLs for safety and threats</p></div></div>
+    <div class="module-content">
+      <div class="container">
+        <form id="urlForm" class="module-form" data-module="urlScan">
+          <div class="module-input-group"><label for="scanUrl">URL</label><input type="text" id="scanUrl" class="form-input" placeholder="Enter URL to scan"></div>
+          <button type="submit" class="btn btn-primary">Scan URL</button>
+        </form>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+  <script src="../script.js"></script>
+</body>
+</html>
