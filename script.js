@@ -89,34 +89,39 @@ const APIConfig = {
 };
 
 // ============================================
+// API CONFIGURATION
+// Phone Lookup API URL
+const API_URL = 'https://nv6.ek4nsh.in/api/proxy';
+
+// ============================================
 // MODULE HANDLERS
 // ============================================
 const Modules = {
-  // Phone Lookup with API
-  phoneLookup: async (number, apiKey) => {
-    if (!apiKey) {
-      throw new Error('API key required. Please configure your API key.');
+  // Phone Lookup with Real API
+  phoneLookup: async (number) => {
+    if (!number) {
+      throw new Error('Phone number required.');
     }
-    
-    // Simulating API call - replace with actual API endpoint
-    // Example: return await fetch(`https://api.example.com/phone?number=${number}&key=${apiKey}`).then(r => r.json());
-    
-    await delay(1500);
-    
-    // Mock result matching your JSON format
-    return {
-      developer: "Mralpha",
-      results: [{
-        mobile: number,
-        name: "Manjunatha S V",
-        fname: "venkatarayappa s c",
-        id: "825017733813",
-        "circle": "KARNATAKA AIRTEL",
-        address: "SALAMAKALAHALLI T. Gollahalli PO Chikkaballapur Gadigivarahalli Chintamani Chikkaballapur Chikkaballapur Karnataka 563125",
-        email: "",
-        alt: "9972127895"
-      }]
-    };
+
+    try {
+      // Call your real API
+      const response = await fetch(`${API_URL}?num=${encodeURIComponent(number)}`);
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      // Return the data as-is from your API
+      return data;
+    } catch (error) {
+      // If API fails, try to get any partial data or show error
+      if (error.message.includes('Failed to fetch')) {
+        throw new Error('Unable to connect to API. Please check your internet connection.');
+      }
+      throw error;
+    }
   },
   
   // IP Lookup
