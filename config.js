@@ -1,48 +1,35 @@
 // ========================================
 // CONFIGURATION FILE
-// Edit these values with your actual credentials
+// Edit this with your credentials or set in Vercel dashboard
 // ========================================
 
 window.AppConfig = {
-  // Google OAuth Client ID (get from https://console.cloud.google.com)
-  googleClientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+  // Set your Google OAuth Client ID here - get from console.cloud.google.com
+  googleClientId: '',  // ← PUT YOUR ID HERE like: 'abc123xyz.apps.googleusercontent.com'
   
-  // Google Analytics Measurement ID (get from https://analytics.google.com)
-  analyticsId: 'G-YOUR_ID',
+  // Set your Google Analytics ID here - get from analytics.google.com
+  analyticsId: '',    // ← PUT YOUR ID HERE like: 'G-XXXXXXXXXX'
   
-  // Phone Lookup API (already configured)
+  // Phone Lookup API (don't change this)
   phoneApiUrl: 'https://nv6.ek4nsh.in/api/proxy',
   
-  // App Name
   appName: 'Data Breach',
   appUrl: window.location.origin
 };
 
-// ========================================
-// HOW TO GET YOUR CREDENTIALS:
-// ========================================
+// Try to load from Vercel environment (if deployed)
+try {
+  if (typeof GOOGLE_CLIENT_ID !== 'undefined' && GOOGLE_CLIENT_ID) {
+    window.AppConfig.googleClientId = GOOGLE_CLIENT_ID;
+  }
+  if (typeof GOOGLE_ANALYTICS_ID !== 'undefined' && GOOGLE_ANALYTICS_ID) {
+    window.AppConfig.analyticsId = GOOGLE_ANALYTICS_ID;
+  }
+} catch(e) {
+  console.log('Running locally');
+}
 
-// GOOGLE CLIENT ID:
-// 1. Go to https://console.cloud.google.com
-// 2. Select your project (or create new)
-// 3. Go to APIs & Services → Credentials
-// 4. Click "Create Credentials" → "OAuth client ID"
-// 5. Application type: "Web application"
-// 6. Name: "Data Breach"
-// 7. Authorized redirect URIs:
-//    - http://localhost:3000/callback.html
-//    - https://yourdomain.vercel.app/callback.html
-// 8. Copy the Client ID (ends with .com)
-
-// GOOGLE ANALYTICS:
-// 1. Go to https://analytics.google.com
-// 2. Start Measurement
-// 3. Enter website name and URL
-// 4. Copy the Measurement ID (starts with G-)
-
-// ========================================
-// DEPLOY TO VERCEL:
-// ========================================
-// vercel env add GOOGLE_CLIENT_ID your_value
-// vercel env add GOOGLE_ANALYTICS_ID G-XXXXXX
-// vercel deploy
+// If empty, use placeholder that will trigger the config message (not the old one!)
+if (!window.AppConfig.googleClientId) {
+  window.AppConfig.googleClientId = null;  // Changed from placeholder to null - triggers proper error
+}

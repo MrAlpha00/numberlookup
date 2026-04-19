@@ -75,11 +75,10 @@
   <script>
     // Google Sign-In function
     function signInWithGoogle() {
-      // Get clientId from config
-      var clientId = window.AppConfig ? window.AppConfig.googleClientId : 'YOUR_CLIENT_ID.apps.googleusercontent.com';
+      var clientId = window.AppConfig ? window.AppConfig.googleClientId : null;
       
-      if (!clientId || clientId === 'YOUR_CLIENT_ID.apps.googleusercontent.com') {
-        alert('Please set your Google Client ID in config.js or Vercel env. Check README.md');
+      if (!clientId || clientId === '' || clientId === 'YOUR_CLIENT_ID.apps.googleusercontent.com') {
+        alert('Please edit config.js and add your Google Client ID!\n\nGet it from: https://console.cloud.google.com → APIs & Services → Credentials → OAuth Client ID');
         return;
       }
       
