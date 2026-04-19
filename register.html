@@ -14,9 +14,6 @@
         <div class="logo-icon">⚡</div>
         <span>Data Breach</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-      </ul>
       <div class="nav-actions">
         <a href="login.html" class="btn btn-ghost">Sign In</a>
       </div>
@@ -31,27 +28,33 @@
           <p>Join the OSINT investigation community</p>
         </div>
         
-        <!-- Google Sign-In Button -->
-        <div class="google-btn-container">
-          <div id="googleSignInBtn"></div>
-        </div>
+        <!-- Google Sign-In -->
+        <button type="button" class="btn oauth-btn" onclick="signInWithGoogle()" style="width: 100%; margin-bottom: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 10px;">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.96 20.53 7.7 23 12 23z"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.96 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Continue with Google
+        </button>
         
         <div class="form-divider">or continue with email</div>
         
         <form id="registerForm">
           <div class="form-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+            <input type="text" id="name" class="form-input" placeholder="Enter your full name" required autocomplete="name">
           </div>
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+            <input type="email" id="email" class="form-input" placeholder="Enter your email" required autocomplete="email">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <div class="input-group">
-              <input type="password" id="password" class="form-input" placeholder="Create a strong password" required>
-              <button type="button" class="toggle-password" onclick="togglePassword('password')">👁️</button>
+            <div class="input-group" style="position: relative;">
+              <input type="password" id="password" class="form-input" placeholder="Create a strong password" required autocomplete="new-password">
+              <button type="button" class="toggle-password" onclick="document.getElementById('password').type = document.getElementById('password').type === 'password' ? 'text' : 'password'">👁️</button>
             </div>
             <div class="password-strength">
               <div class="password-strength-bar" id="strengthBar"></div>
@@ -59,9 +62,9 @@
           </div>
           <div class="form-group">
             <label for="confirmPassword">Confirm Password</label>
-            <div class="input-group">
-              <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required>
-              <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</button>
+            <div class="input-group" style="position: relative;">
+              <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required autocomplete="new-password">
+              <button type="button" class="toggle-password" onclick="document.getElementById('confirmPassword').type = document.getElementById('confirmPassword').type === 'password' ? 'text' : 'password'">👁️</button>
             </div>
           </div>
           <div class="form-group">
@@ -82,21 +85,11 @@
 
   <script src="script.js"></script>
   <script>
-    // Toggle password visibility
-    function togglePassword(inputId) {
-      const input = document.getElementById(inputId);
-      if (input.type === 'password') {
-        input.type = 'text';
-      } else {
-        input.type = 'password';
-      }
-    }
-    
     // Password strength checker
     document.getElementById('password').addEventListener('input', function() {
-      const password = this.value;
-      const strengthBar = document.getElementById('strengthBar');
-      let score = 0;
+      var password = this.value;
+      var strengthBar = document.getElementById('strengthBar');
+      var score = 0;
       if (password.length >= 8) score++;
       if (password.length >= 12) score++;
       if (/[A-Z]/.test(password)) score++;
@@ -104,70 +97,32 @@
       if (/[0-9]/.test(password)) score++;
       if (/[^A-Za-z0-9]/.test(password)) score++;
       
+      strengthBar.style.width = '0%';
       strengthBar.className = 'password-strength-bar';
-      if (score <= 2) strengthBar.classList.add('weak');
-      else if (score <= 4) strengthBar.classList.add('medium');
-      else strengthBar.classList.add('strong');
+      if (score <= 2) { strengthBar.style.width = '30%'; strengthBar.classList.add('weak'); }
+      else if (score <= 4) { strengthBar.style.width = '60%'; strengthBar.classList.add('medium'); }
+      else { strengthBar.style.width = '100%'; strengthBar.classList.add('strong'); }
     });
     
-    // Initialize Google Sign-In when page loads
-    window.onload = function() {
-      initGoogleSignIn();
-    };
-    
-    function initGoogleSignIn() {
-      // Check if Google script is loaded
-      if (typeof google !== 'undefined' && google.accounts) {
-        try {
-          google.accounts.id.initialize({
-            client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-            callback: handleGoogleCredential,
-            auto_select: false,
-            cancel_on_tap_outside: false
-          });
-          
-          const btn = document.getElementById('googleSignInBtn');
-          if (btn) {
-            google.accounts.id.renderButton(btn, {
-              theme: 'outline',
-              size: 'large',
-              width: '100%',
-              text: 'signup_with'
-            });
-          }
-        } catch(e) {
-          console.log('Google Sign-In not configured');
-        }
-      } else {
-        // Load Google Identity Services script
-        var script = document.createElement('script');
-        script.src = 'https://accounts.google.com/gsi/client';
-        script.onload = initGoogleSignIn;
-        script.onerror = function() {
-          console.log('Could not load Google Sign-In script');
-        };
-        document.head.appendChild(script);
+    // Google Sign-In
+    function signInWithGoogle() {
+      var clientId = 'YOUR_CLIENT_ID.apps.googleusercontent.com';
+      
+      if (clientId === 'YOUR_CLIENT_ID.apps.googleusercontent.com') {
+        alert('Please set your Google Client ID in the code. Check README.md for setup instructions.');
+        return;
       }
-    }
-    
-    function handleGoogleCredential(response) {
-      try {
-        var payload = JSON.parse(atob(response.credential.split('.')[1]));
-        var session = {
-          email: payload.email,
-          name: payload.name,
-          picture: payload.picture,
-          googleId: payload.sub,
-          loggedIn: true,
-          timestamp: Date.now(),
-          loginType: 'google'
-        };
-        localStorage.setItem('databreach_session', JSON.stringify(session));
-        window.location.href = 'dashboard.html';
-      } catch (error) {
-        console.error('Auth error:', error);
-        alert('Authentication failed. Please try again.');
-      }
+      
+      var redirectUri = encodeURIComponent(window.location.origin + '/callback.html');
+      var scope = encodeURIComponent('email profile');
+      var authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+        'client_id=' + clientId +
+        '&redirect_uri=' + redirectUri +
+        '&response_type=token' +
+        '&scope=' + scope +
+        '&include_granted_scopes=true';
+      
+      window.location.href = authUrl;
     }
     
     // Form submission
@@ -179,6 +134,11 @@
       var confirmPassword = document.getElementById('confirmPassword').value;
       var terms = document.getElementById('terms').checked;
       
+      if (!name || !email || !password) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
       if (password !== confirmPassword) {
         alert('Passwords do not match');
         return;
@@ -189,25 +149,14 @@
         return;
       }
       
-      // Save user
       var users = JSON.parse(localStorage.getItem('databreach_users') || '[]');
       var exists = users.find(function(u) { return u.email === email; });
-      if (exists) {
-        alert('Email already registered');
-        return;
-      }
+      if (exists) { alert('Email already registered'); return; }
       
       users.push({ name: name, email: email, password: password, timestamp: Date.now() });
       localStorage.setItem('databreach_users', JSON.stringify(users));
       
-      // Login
-      var session = {
-        email: email,
-        name: name,
-        loggedIn: true,
-        timestamp: Date.now(),
-        loginType: 'email'
-      };
+      var session = { email: email, name: name, loggedIn: true, timestamp: Date.now(), loginType: 'email' };
       localStorage.setItem('databreach_session', JSON.stringify(session));
       
       window.location.href = 'dashboard.html';

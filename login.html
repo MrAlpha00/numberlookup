@@ -28,21 +28,29 @@
           <p>Sign in to access your OSINT toolkit</p>
         </div>
         
-        <!-- Google Sign-In Button -->
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+        <!-- Google Sign-In - Set your Client ID in script -->
+        <button type="button" class="btn oauth-btn" onclick="signInWithGoogle()" style="width: 100%; margin-bottom: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 10px;">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.96 20.53 7.7 23 12 23z"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.96 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Continue with Google
+        </button>
         
         <div class="form-divider">or continue with email</div>
         
         <form id="loginForm">
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+            <input type="email" id="email" class="form-input" placeholder="Enter your email" required autocomplete="email">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <div class="input-group">
-              <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
-              <button type="button" class="toggle-password" onclick="togglePassword('password')">👁️</button>
+            <div class="input-group" style="position: relative;">
+              <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
+              <button type="button" class="toggle-password" onclick="document.getElementById('password').type = document.getElementById('password').type === 'password' ? 'text' : 'password'">👁️</button>
             </div>
           </div>
           <div class="form-group">
@@ -63,21 +71,28 @@
 
   <script src="script.js"></script>
   <script>
-    // Toggle password visibility
-    function togglePassword(inputId) {
-      var input = document.getElementById(inputId);
-      if (input.type === 'password') {
-        input.type = 'text';
-      } else {
-        input.type = 'password';
+    // Google Sign-In function
+    function signInWithGoogle() {
+      // Replace with your actual Google Client ID from console.cloud.google.com
+      var clientId = 'YOUR_CLIENT_ID.apps.googleusercontent.com';
+      
+      if (clientId === 'YOUR_CLIENT_ID.apps.googleusercontent.com') {
+        alert('Please set your Google Client ID in the code. Check README.md for setup instructions.');
+        return;
       }
+      
+      // Redirect to Google OAuth
+      var redirectUri = encodeURIComponent(window.location.origin + '/callback.html');
+      var scope = encodeURIComponent('email profile');
+      var authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+        'client_id=' + clientId +
+        '&redirect_uri=' + redirectUri +
+        '&response_type=token' +
+        '&scope=' + scope +
+        '&include_granted_scopes=true';
+      
+      window.location.href = authUrl;
     }
-    
-    // Ensure inputs are clickable
-    document.querySelectorAll('.form-input').forEach(function(input) {
-      input.style.pointerEvents = 'auto';
-      input.style.opacity = '1';
-    });
     
     // Form submission
     document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -90,57 +105,17 @@
         return;
       }
       
-      // Check users
       var users = JSON.parse(localStorage.getItem('databreach_users') || '[]');
       var user = users.find(function(u) { return u.email === email && u.password === password; });
       
       if (user) {
-        var session = {
-          email: user.email,
-          name: user.name,
-          loggedIn: true,
-          timestamp: Date.now(),
-          loginType: 'email'
-        };
+        var session = { email: user.email, name: user.name, loggedIn: true, timestamp: Date.now(), loginType: 'email' };
         localStorage.setItem('databreach_session', JSON.stringify(session));
         window.location.href = 'dashboard.html';
       } else {
         alert('Invalid email or password');
       }
     });
-  </script>
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-  <script>
-    function renderButton() {
-      gapi.signin2.render('googleBtn', {
-        'scope': 'profile email',
-        'width': '100%',
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onGoogleSuccess,
-        'onfailure': onGoogleFailure
-      });
-    }
-    
-    function onGoogleSuccess(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      var session = {
-        email: profile.getEmail(),
-        name: profile.getName(),
-        picture: profile.getImageUrl(),
-        googleId: profile.getId(),
-        loggedIn: true,
-        timestamp: Date.now(),
-        loginType: 'google'
-      };
-      localStorage.setItem('databreach_session', JSON.stringify(session));
-      window.location.href = 'dashboard.html';
-    }
-    
-    function onGoogleFailure(error) {
-      console.log('Google Sign-In error:', error);
-    }
   </script>
 </body>
 </html>
