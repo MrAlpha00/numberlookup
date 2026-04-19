@@ -793,6 +793,14 @@ a:hover {
   gap: 12px;
 }
 
+.google-btn-container {
+  margin-bottom: 24px;
+}
+
+.google-btn-container > div {
+  width: 100%;
+}
+
 .oauth-btn {
   flex: 1;
   padding: 12px;

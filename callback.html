@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=dashboard.html">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Please wait, redirecting to dashboard...</p>
+  <script>
+    // Handle OAuth callback
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+      // OAuth 2.0 callback
+      const params = new URLSearchParams(hash.substring(1));
+      const accessToken = params.get('access_token');
+      if (accessToken) {
+        localStorage.setItem('databreach_google_token', accessToken);
+      }
+    }
+    // Check for error
+    if (window.location.search.includes('error')) {
+      window.location.href = 'login.html?error=access_denied';
+    }
+    // Default redirect
+    window.location.href = 'dashboard.html';
+  </script>
+</body>
+</html>
