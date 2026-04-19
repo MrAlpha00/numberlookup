@@ -647,6 +647,8 @@ a:hover {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  position: relative;
+  z-index: 100;
 }
 
 .auth-container {
