@@ -14,9 +14,6 @@
         <div class="logo-icon">⚡</div>
         <span>Data Breach</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-      </ul>
       <div class="nav-actions">
         <a href="register.html" class="btn btn-primary">Sign Up</a>
       </div>
@@ -32,9 +29,7 @@
         </div>
         
         <!-- Google Sign-In Button -->
-        <div class="google-btn-container">
-          <div id="googleSignInBtn"></div>
-        </div>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
         
         <div class="form-divider">or continue with email</div>
         
@@ -78,69 +73,22 @@
       }
     }
     
-    // Initialize Google Sign-In when page loads
-    window.onload = function() {
-      initGoogleSignIn();
-    };
-    
-    function initGoogleSignIn() {
-      if (typeof google !== 'undefined' && google.accounts) {
-        try {
-          google.accounts.id.initialize({
-            client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-            callback: handleGoogleCredential,
-            auto_select: false,
-            cancel_on_tap_outside: false
-          });
-          
-          var btn = document.getElementById('googleSignInBtn');
-          if (btn) {
-            google.accounts.id.renderButton(btn, {
-              theme: 'outline',
-              size: 'large',
-              width: '100%',
-              text: 'signin_with'
-            });
-          }
-        } catch(e) {
-          console.log('Google Sign-In not configured');
-        }
-      } else {
-        var script = document.createElement('script');
-        script.src = 'https://accounts.google.com/gsi/client';
-        script.onload = initGoogleSignIn;
-        script.onerror = function() {
-          console.log('Could not load Google Sign-In script');
-        };
-        document.head.appendChild(script);
-      }
-    }
-    
-    function handleGoogleCredential(response) {
-      try {
-        var payload = JSON.parse(atob(response.credential.split('.')[1]));
-        var session = {
-          email: payload.email,
-          name: payload.name,
-          picture: payload.picture,
-          googleId: payload.sub,
-          loggedIn: true,
-          timestamp: Date.now(),
-          loginType: 'google'
-        };
-        localStorage.setItem('databreach_session', JSON.stringify(session));
-        window.location.href = 'dashboard.html';
-      } catch (error) {
-        console.error('Auth error:', error);
-        alert('Authentication failed. Please try again.');
-      }
-    }
+    // Ensure inputs are clickable
+    document.querySelectorAll('.form-input').forEach(function(input) {
+      input.style.pointerEvents = 'auto';
+      input.style.opacity = '1';
+    });
     
     // Form submission
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
+      
+      if (!email || !password) {
+        alert('Please enter email and password');
+        return;
+      }
       
       // Check users
       var users = JSON.parse(localStorage.getItem('databreach_users') || '[]');
@@ -160,6 +108,39 @@
         alert('Invalid email or password');
       }
     });
+  </script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <script>
+    function renderButton() {
+      gapi.signin2.render('googleBtn', {
+        'scope': 'profile email',
+        'width': '100%',
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onGoogleSuccess,
+        'onfailure': onGoogleFailure
+      });
+    }
+    
+    function onGoogleSuccess(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      var session = {
+        email: profile.getEmail(),
+        name: profile.getName(),
+        picture: profile.getImageUrl(),
+        googleId: profile.getId(),
+        loggedIn: true,
+        timestamp: Date.now(),
+        loginType: 'google'
+      };
+      localStorage.setItem('databreach_session', JSON.stringify(session));
+      window.location.href = 'dashboard.html';
+    }
+    
+    function onGoogleFailure(error) {
+      console.log('Google Sign-In error:', error);
+    }
   </script>
 </body>
 </html>
