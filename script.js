@@ -609,38 +609,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Phone Lookup Module
   const phoneForm = document.getElementById('phoneForm');
   if (phoneForm) {
-    const apiKeyInput = document.getElementById('apiKey');
     const phoneInput = document.getElementById('phoneNumber');
     const resultBtn = document.getElementById('lookupBtn');
     const resultContainer = document.getElementById('resultContainer');
     
-    // Load saved API key
-    if (apiKeyInput && APIConfig.has()) {
-      apiKeyInput.value = APIConfig.get();
-    }
-    
     phoneForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const apiKey = apiKeyInput?.value;
       const phone = phoneInput?.value;
-      
-      if (!apiKey) {
-        UI.showError('Please enter your API key');
-        return;
-      }
       
       if (!phone) {
         UI.showError('Please enter a phone number');
         return;
       }
       
-      APIConfig.save(apiKey);
-      
       try {
         UI.showLoader(resultBtn);
         resultBtn.disabled = true;
         
-        const result = await Modules.phoneLookup(phone, apiKey);
+        const result = await Modules.phoneLookup(phone);
         
         resultContainer.innerHTML = resultTemplate(result);
         resultContainer.classList.add('active');
