@@ -795,10 +795,20 @@ a:hover {
 
 .google-btn-container {
   margin-bottom: 24px;
+  min-height: 50px;
 }
 
 .google-btn-container > div {
   width: 100%;
+}
+
+.google-btn-container iframe {
+  width: 100% !important;
+}
+
+.google-btn-container > div[role="button"] {
+  width: 100%;
+  max-width: 100%;
 }
 
 .oauth-btn {
