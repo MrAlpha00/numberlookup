@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Scan - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo"><div class="logo-icon">⚡</div><span>Data Breach</span></a>
+      <ul class="nav-links"><li><a href="../dashboard.html">Dashboard</a></li></ul>
+      <div class="nav-actions"><button id="logoutBtn" class="btn btn-ghost">Logout</button></div>
+    </div>
+  </nav>
+  <section class="module-page">
+    <div class="module-header"><div class="container"><h1>🔍 Social Media Scan</h1><p>Scan social media profiles comprehensively</p></div></div>
+    <div class="module-content">
+      <div class="container">
+        <div class="module-form">
+          <div class="module-input-group"><label>Search Query</label><input type="text" id="socialInput" class="form-input" placeholder="Enter name, email, or phone"></div>
+          <button type="button" class="btn btn-primary" onclick="simulateScan()">Scan</button>
+        </div>
+        <div id="resultContainer" class="result-container"></div>
+      </div>
+    </div>
+  </section>
+  <script src="../script.js"></script>
+  <script>function simulateScan(){document.getElementById('resultContainer').innerHTML='<div class="result-card"><div class="result-body"><p style="color:var(--text-secondary)">Demo module - Social media OSINT integration needed</p></div></div>';document.getElementById('resultContainer').classList.add('active');}</script>
+</body>
+</html>
