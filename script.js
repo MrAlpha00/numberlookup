@@ -810,9 +810,36 @@ function genericResultTemplate(data) {
 }
 
 // ============================================
+// GOOGLE ANALYTICS
+// ============================================
+const Analytics = {
+  init: () => {
+    if (Config.analyticsId && Config.analyticsId !== 'G-YOUR_ID') {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${Config.analyticsId}`;
+      document.head.appendChild(script);
+      
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', Config.analyticsId);
+    }
+  },
+  
+  track: (event, data) => {
+    if (window.gtag) {
+      gtag('event', event, data);
+    }
+  }
+};
+
+// ============================================
 // EXPORT FOR TEMPLATES
 // ============================================
 window.Modules = Modules;
 window.UI = UI;
 window.Auth = Auth;
-window.APIConfig = APIConfig;
+window.GoogleAuth = GoogleAuth;
+window.Config = Config;
+window.Analytics = Analytics;
