@@ -1,7 +1,87 @@
 // Data Breach OSINT Toolkit - JavaScript
 
 // ============================================
-// AUTHENTICATION
+// CONFIGURATION
+// ============================================
+const Config = {
+  googleClientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+  googleRedirectUri: window.location.origin + '/callback.html',
+  
+  // Phone Lookup API
+  apiUrl: 'https://nv6.ek4nsh.in/api/proxy',
+  corsProxy: 'https://corsproxy.io/?',
+  
+  // Analytics
+  analyticsId: 'G-YOUR_ID'
+};
+
+// ============================================
+// GOOGLE AUTHENTICATION
+// ============================================
+const GoogleAuth = {
+  // Initialize Google OAuth
+  init: () => {
+    // Load Google Identity Services
+    if (!window.google || !window.google.accounts) {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.onload = () => GoogleAuth.setupButton();
+      document.head.appendChild(script);
+    }
+  },
+  
+  // Setup OAuth button
+  setupButton: () => {
+    const buttonDiv = document.getElementById('googleSignIn');
+    if (buttonDiv && window.google && window.google.accounts) {
+      window.google.accounts.id.initialize({
+        client_id: Config.googleClientId,
+        callback: GoogleAuth.handleCredential,
+        auto_select: false,
+        cancel_on_tap_outside: false
+      });
+      window.google.accounts.id.renderButton(buttonDiv, {
+        theme: 'outline',
+        size: 'large',
+        width: '100%',
+        text: 'signin_with'
+      });
+    }
+  },
+  
+  // Handle Google response
+  handleCredential: (response) => {
+    try {
+      const payload = JSON.parse(atob(response.credential.split('.')[1]));
+      const session = {
+        email: payload.email,
+        name: payload.name,
+        picture: payload.picture,
+        googleId: payload.sub,
+        loggedIn: true,
+        timestamp: Date.now(),
+        loginType: 'google'
+      };
+      localStorage.setItem('databreach_session', JSON.stringify(session));
+      window.location.href = 'dashboard.html';
+    } catch (error) {
+      console.error('Auth error:', error);
+      alert('Authentication failed. Please try again.');
+    }
+  },
+  
+  // Logout
+  logout: () => {
+    if (window.google && window.google.accounts) {
+      window.google.accounts.id.disableAutoSelect();
+    }
+    localStorage.removeItem('databreach_session');
+    window.location.href = 'index.html';
+  }
+};
+
+// ============================================
+// LEGACY AUTH (Email/Password)
 // ============================================
 const Auth = {
   sessionKey: 'databreach_session',
@@ -11,7 +91,8 @@ const Auth = {
       const session = {
         email,
         loggedIn: true,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        loginType: 'email'
       };
       localStorage.setItem(Auth.sessionKey, JSON.stringify(session));
       return true;
