@@ -6,6 +6,8 @@
   <title>Register - Data Breach</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<!-- Load config first -->
+  <script src="config.js"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -106,10 +108,10 @@
     
     // Google Sign-In
     function signInWithGoogle() {
-      var clientId = 'YOUR_CLIENT_ID.apps.googleusercontent.com';
+      var clientId = window.AppConfig ? window.AppConfig.googleClientId : 'YOUR_CLIENT_ID.apps.googleusercontent.com';
       
-      if (clientId === 'YOUR_CLIENT_ID.apps.googleusercontent.com') {
-        alert('Please set your Google Client ID in the code. Check README.md for setup instructions.');
+      if (!clientId || clientId === 'YOUR_CLIENT_ID.apps.googleusercontent.com') {
+        alert('Please set your Google Client ID in config.js or Vercel env. Check README.md');
         return;
       }
       
