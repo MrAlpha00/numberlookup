@@ -713,6 +713,8 @@ a:hover {
 
 .form-group {
   margin-bottom: 24px;
+  position: relative;
+  z-index: 10;
 }
 
 .form-group label {
@@ -722,6 +724,8 @@ a:hover {
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  position: relative;
+  z-index: 10;
 }
 
 .form-input {
