@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base64 Utility - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo"><div class="logo-icon">⚡</div><span>Data Breach</span></a>
+      <ul class="nav-links"><li><a href="../dashboard.html">Dashboard</a></li></ul>
+      <div class="nav-actions"><button id="logoutBtn" class="btn btn-ghost">Logout</button></div>
+    </div>
+  </nav>
+  <section class="module-page">
+    <div class="module-header"><div class="container"><h1>🔤 Base64 Utility</h1><p>Encode and Decode Base64 strings</p></div></div>
+    <div class="module-content">
+      <div class="container">
+        <div class="module-form">
+          <div class="module-input-group"><label>Input Text</label><textarea id="base64Input" class="form-input" rows="4" placeholder="Enter text to encode/decode"></textarea></div>
+          <div class="flex gap-1"><button onclick="encodeBase64()" class="btn btn-primary">Encode</button><button onclick="decodeBase64()" class="btn btn-secondary">Decode</button></div>
+          <div class="module-input-group mt-2"><label>Output</label><textarea id="base64Output" class="form-input" rows="4" readonly></textarea></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="../script.js"></script>
+  <script>function encodeBase64(){const i=document.getElementById('base64Input').value;document.getElementById('base64Output').value=btoa(i);}function decodeBase64(){const i=document.getElementById('base64Input').value;try{document.getElementById('base64Output').value=atob(i);}catch(e){alert('Invalid Base64');}}</script>
+</body>
+</html>
