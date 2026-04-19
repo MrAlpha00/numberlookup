@@ -722,6 +722,16 @@ a:hover {
   font-family: var(--font-body);
   font-size: 0.9rem;
   transition: var(--transition-normal);
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+  z-index: 10;
 }
 
 .form-input:focus {
