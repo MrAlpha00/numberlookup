@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON to CSV - Data Breach</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo"><div class="logo-icon">⚡</div><span>Data Breach</span></a>
+      <ul class="nav-links"><li><a href="../dashboard.html">Dashboard</a></li></ul>
+      <div class="nav-actions"><button id="logoutBtn" class="btn btn-ghost">Logout</button></div>
+    </div>
+  </nav>
+  <section class="module-page">
+    <div class="module-header"><div class="container"><h1>📊 JSON to CSV</h1><p>Convert JSON array data to CSV format</p></div></div>
+    <div class="module-content">
+      <div class="container">
+        <div class="module-form">
+          <div class="module-input-group"><label>Input JSON</label><textarea id="jsonInput" class="form-input" rows="6" placeholder='[{"name":"John","age":30},{"name":"Jane","age":25}]'></textarea></div>
+          <button onclick="convertJsonToCsv()" class="btn btn-primary">Convert</button>
+          <div class="module-input-group mt-2"><label>Output CSV</label><textarea id="csvOutput" class="form-input" rows="6" readonly></textarea></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="../script.js"></script>
+  <script>function convertJsonToCsv(){try{const d=JSON.parse(document.getElementById('jsonInput').value);if(d.length==0)return;const k=Object.keys(d[0]);const r=d.map(o=>k.map(x=>o[x]).join(','));document.getElementById('csvOutput').value=[k.join(','),...r].join('\n');}catch(e){alert('Invalid JSON');}}</script>
+</body>
+</html>
